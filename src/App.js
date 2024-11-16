@@ -25,7 +25,7 @@ const App = () => {
       </div>
       <footer style={styles.footer}>
         <a
-          href="https://twitter.com"
+          href="https://t.me/heaven_on_near"
           target="_blank"
           rel="noopener noreferrer"
           style={styles.link}
