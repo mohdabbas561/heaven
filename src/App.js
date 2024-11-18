@@ -1,76 +1,109 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import "./App.css";
 
 const App = () => {
-  const text =
-    "The Gate of Heaven will be opened soon, All sins will be washed";
-  const [displayText, setDisplayText] = useState("");
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (index < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText((prev) => prev + text[index]);
-        setIndex(index + 1);
-      }, 100); // typing speed
-      return () => clearTimeout(timeout);
-    }
-  }, [index, text]);
+  const [roadmapText, setRoadmapText] = useState("Roadmap");
 
   return (
-    <div style={styles.body}>
-      <div style={styles.content}>
-        <div style={styles.terminal}>
-          <p style={styles.text}>{displayText}</p>
+    <div className="app">
+      {/* Matrix Background */}
+      <MatrixBackground />
+
+      {/* Navbar */}
+      <nav className="navbar">
+        <h1 className="logo">$HEAVEN</h1>
+        <ul className="nav-links">
+          <li>
+            <a href="https://t.me/heaven_on_near">Twitter</a>
+          </li>
+          <li>
+            <a href="https://x.com/heavenonnear">Telegram</a>
+          </li>
+        </ul>
+      </nav>
+
+      {/* Main Section */}
+      <main className="main">
+        <div className="content">
+          {/* Buttons */}
+          <div className="buttons">
+            <button
+              className="btn buy-btn"
+              onClick={() =>
+                window.open("https://dexscreener.com/near/refv1-5682", "_blank")
+              }
+            >
+              Buy
+            </button>
+            <button
+              className="btn roadmap-btn"
+              onMouseEnter={() => setRoadmapText("Coming Soon")}
+              onMouseLeave={() => setRoadmapText("Roadmap")}
+            >
+              {roadmapText}
+            </button>
+          </div>
+
+          {/* Image */}
+          <div className="image">
+            <img
+              src="https://pbs.twimg.com/profile_images/1857800986871410688/45IcAYUl_400x400.jpg"
+              alt="$HEAVEN"
+              className="random-image"
+            />
+          </div>
         </div>
-      </div>
-      <footer style={styles.footer}>
-        <a
-          href="https://t.me/heaven_on_near"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={styles.link}
-        >
-          Gate of Heaven
-        </a>
-      </footer>
+      </main>
+
+      {/* Footer */}
+      <footer className="footer">Made with love on NEAR ❤️</footer>
     </div>
   );
 };
 
-const styles = {
-  body: {
-    margin: 0,
-    fontFamily: "'Courier New', Courier, monospace",
-    backgroundColor: "black",
-    color: "red",
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  content: {
-    flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  terminal: {
-    fontSize: "1.5rem",
-    whiteSpace: "pre-wrap", // Preserve line breaks
-    textAlign: "center",
-  },
-  text: {
-    margin: 0,
-  },
-  footer: {
-    textAlign: "center",
-    padding: "0.5rem 0",
-  },
-  link: {
-    color: "green",
-    textDecoration: "none",
-    fontWeight: "bold",
-  },
+// Matrix Background Component
+const MatrixBackground = () => {
+  React.useEffect(() => {
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = "$HEAVEN"; // Updated letters to only "$HEAVEN"
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    const draw = () => {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#0F0";
+      ctx.font = `${fontSize}px monospace`;
+
+      drops.forEach((y, i) => {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, y * fontSize);
+
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      });
+    };
+
+    const interval = setInterval(draw, 50);
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <canvas id="matrixCanvas" className="matrix-canvas"></canvas>;
 };
 
 export default App;
