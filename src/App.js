@@ -31,7 +31,7 @@ const App = () => {
       fontWeight: "bold",
       color: "red",
       textShadow: "0 0 10px red",
-      marginBottom: "10rem",
+      marginBottom: "1rem",
     },
     image: {
       width: "250px",
@@ -141,20 +141,21 @@ const App = () => {
             style={styles.image}
           />
           <div style={styles.buttons}>
-            <button
-              style={styles.btn}
-              onMouseOver={(e) => {
-                e.target.style.backgroundColor = styles.btnHover.backgroundColor;
-                e.target.style.color = styles.btnHover.color;
-              }}
-              onMouseOut={(e) => {
-                e.target.style.backgroundColor = "transparent";
-                e.target.style.color = "red";
-              }}
-              onClick={() => window.location.href = "#"}
-            >
-              Buy Now
-            </button>
+            <a href="https://dexscreener.com/near/refv1-5692" target="_blank" rel="noopener noreferrer">
+              <button
+                style={styles.btn}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = styles.btnHover.backgroundColor;
+                  e.target.style.color = styles.btnHover.color;
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = "transparent";
+                  e.target.style.color = "red";
+                }}
+              >
+                Buy Now
+              </button>
+            </a>
             <button
               style={styles.btn}
               onMouseOver={(e) => {
