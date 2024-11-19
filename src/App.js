@@ -30,7 +30,7 @@ const App = () => {
             <button
               className="btn buy-btn"
               onClick={() =>
-                window.open("https://dexscreener.com/near/refv1-5682", "_blank")
+                window.open("https://meme.cooking/meme/867", "_blank")
               }
             >
               Buy
